@@ -1,32 +1,32 @@
 output_dir: 'runs/save'
 log_dir: 'runs/logs'
-checkpoint: 'swin_base_20_22.627086639404297.pth'
+checkpoint: 'swin_base_0_11.776384736788104.pth'
 device: 'cuda:0'
 val_epoch: 1
-iter_log: 5
+iter_log: 20
 seed: 42
 dataset:
   name: 'zalo'
-  root: './data'
+  root: ''
   augmentation:
     rand_crop_size: 224
     rand_hori_flip: 0.5
     rand_rotation: 20
-  train_set: './data/train_label.json'
-  val_set: './data/train_label.json'
+  train_set: './metas/intra_test/test_label.json'
+  val_set: './metas/intra_test/test_label.json'
   mean: [0.5070, 0.4764, 0.4551]
   sigma: [0.2480, 0.2468, 0.2416]
 
 model:
-  base: 'resnet18'
+  base: 'swin_base'
   pretrained: True
   image_size: [300, 300]
 
 train:
-  batch_size: 10
+  batch_size: 64
   optimizer: 'adam'
   lr: 0.002
   num_epochs: 300
 
 val:
-  batch_size: 16
+  batch_size: 64

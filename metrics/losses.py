@@ -90,12 +90,12 @@ class AdMSoftmaxLoss(nn.Module):
 
 class PatchLoss(nn.Module):
 
-    def __init__(self, alpha1=1.0, alpha2=1.0):
+    def __init__(self, model_out_feature=512, alpha1=1.0, alpha2=1.0):
         super().__init__()
         self.alpha1 = alpha1
         self.alpha2 = alpha2
         self.sim_loss = SimilarityLoss()
-        self.amsm_loss = AdMSoftmaxLoss(512, 5)
+        self.amsm_loss = AdMSoftmaxLoss(model_out_feature, 5)
 
     def forward(self, x1, x2, label):
         amsm_loss1 = self.amsm_loss(x1.squeeze(3).squeeze(2), label)

@@ -122,7 +122,7 @@ class Trainer(BaseTrainer):
         seed = randint(0, len(self.valloader)-1)
         
         with torch.no_grad():
-            for i, (img1, img2, label) in enumerate(self.valloader):
+            for i, (img1, img2, label) in tqdm(enumerate(self.valloader)):
                 img1, img2, label = img1.to(self.device), img2.to(self.device), label.to(self.device)
                 feature1 = self.network(img1)
                 feature2 = self.network(img2)

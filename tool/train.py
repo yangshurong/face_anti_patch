@@ -21,7 +21,7 @@ def main():
     from utils.utils import read_cfg, get_optimizer, build_network, \
         get_device, get_rank
 
-    cfg = read_cfg(cfg_file='config/config.yaml')
+    cfg = read_cfg(cfg_file='config/config_swin.yaml')
 
     # fix the seed for reproducibility
     seed = cfg['seed'] + get_rank()
@@ -35,7 +35,8 @@ def main():
     model.to(device)
     optimizer = get_optimizer(cfg, model)
     lr_scheduler = StepLR(optimizer=optimizer, step_size=90, gamma=0.5)
-    criterion = PatchLoss().to(device=device)
+    criterion = PatchLoss(
+        model_out_feature=model.model_out_feature).to(device=device)
     writer = SummaryWriter(cfg['log_dir'])
 
     # dump_input = torch.randn((1, 3, cfg['dataset']['augmentation']['rand_crop_size'], cfg['dataset']['augmentation']['rand_crop_size']))

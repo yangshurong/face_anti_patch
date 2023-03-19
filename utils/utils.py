@@ -9,8 +9,14 @@ from torch import optim
 import torch.distributed as dist
 import cv2
 
-from models.resnet18 import FeatureExtractor
-
+from models.resnet18 import Resnet18
+from models.swin_base import Swin_base
+from models.DC_CDN import DCCDN
+MODEL={
+    'resnet18':Resnet18,
+    'swin_base':Swin_base,
+    'DCCDN':DCCDN
+}
 
 def calc_acc(pred, target):
     pred = torch.argmax(pred, dim=1)
@@ -86,7 +92,7 @@ def build_network(cfg, device):
     network = None
 
     if cfg['model']['base'] is not None:
-        network = FeatureExtractor(pretrained=cfg['model']['pretrained'], device=device)
+        network = MODEL[cfg['model']['base']](pretrained=cfg['model']['pretrained'], device=device)
     else:
         raise NotImplementedError
 

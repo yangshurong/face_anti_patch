@@ -8,7 +8,6 @@ from torch import nn
 from torch.nn import Parameter
 import pdb
 import numpy as np
-from torchsummary import summary
 
 
 class Conv2d_Hori_Veri_Cross(nn.Module):
@@ -367,10 +366,10 @@ class DC_CDN(nn.Module):
         return depth, x_concat
 
 
-class FeatureExtractor(nn.Module):
+class DCCDN(nn.Module):
     
     def __init__(self, pretrained=True, device='cpu'):
-        super(FeatureExtractor, self).__init__()
+        super(DCCDN, self).__init__()
         self.nets = DC_CDN()
         self.avgpool = nn.AdaptiveAvgPool2d(output_size=1)
         self.device = device
