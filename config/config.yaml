@@ -2,7 +2,7 @@ output_dir: 'runs/save'
 log_dir: 'runs/logs'
 checkpoint: 'swin_base_20_22.627086639404297.pth'
 device: 'cuda:0'
-val_epoch: 20
+val_epoch: 1
 iter_log: 5
 seed: 42
 dataset:
