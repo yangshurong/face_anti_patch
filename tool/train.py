@@ -21,7 +21,7 @@ def main():
     from utils.utils import read_cfg, get_optimizer, build_network, \
         get_device, get_rank
 
-    cfg = read_cfg(cfg_file='config/config_swin.yaml')
+    cfg = read_cfg(cfg_file='config/config.yaml')
 
     # fix the seed for reproducibility
     seed = cfg['seed'] + get_rank()
@@ -35,6 +35,7 @@ def main():
     model.to(device)
     optimizer = get_optimizer(cfg, model)
     lr_scheduler = StepLR(optimizer=optimizer, step_size=90, gamma=0.5)
+    # print(model.model_out_feature)
     criterion = PatchLoss(
         model_out_feature=model.model_out_feature).to(device=device)
     writer = SummaryWriter(cfg['log_dir'])
@@ -82,14 +83,14 @@ def main():
     trainloader = torch.utils.data.DataLoader(
         dataset=trainset,
         batch_size=cfg['train']['batch_size'],
-        shuffle=True,
+        shuffle=False,
         num_workers=4
     )
 
     valloader = torch.utils.data.DataLoader(
         dataset=valset,
         batch_size=cfg['val']['batch_size'],
-        shuffle=True,
+        shuffle=False,
         num_workers=4
     )
 

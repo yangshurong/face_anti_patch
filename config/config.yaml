@@ -1,9 +1,9 @@
 output_dir: 'runs/save'
 log_dir: 'runs/logs'
-checkpoint: 'swin_base_20_22.627086639404297.pth'
+checkpoint: 'aadwda'
 device: 'cuda:0'
 val_epoch: 1
-iter_log: 5
+iter_log: 1
 seed: 42
 dataset:
   name: 'zalo'
@@ -23,10 +23,10 @@ model:
   image_size: [300, 300]
 
 train:
-  batch_size: 10
+  batch_size: 1
   optimizer: 'adam'
   lr: 0.002
   num_epochs: 300
 
 val:
-  batch_size: 16
+  batch_size: 1
